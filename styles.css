@@ -1,0 +1,22 @@
+body{
+    padding:50px; 
+    background-color: #1d2630;  
+}
+.container{
+    border-radius: 20px;
+    max-width: 600px;
+    margin:0 auto;
+    padding:50px;
+    background-color: azure;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+.form-group{
+    margin-bottom:30px;  
+}
+
+p {
+    margin-top: 20px;
+}
+
+
