@@ -6,124 +6,121 @@
     require "classes/auth.php";
     $conn = require "inc/db.php";
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
-           $email = $_POST["email"];
-           $password = $_POST["password"];
-           $checkField = new FieldValidator();
-           $errors = $checkField->checkLogin($email, $password);
-           if (count($errors)>0) {
-                foreach ($errors as  $error){
-                    echo "<div class='alert alert-danger'>$error</div>";
+        $email = $_POST["email"];
+        $password = $_POST["password"];
+        $checkField = new FieldValidator();
+        $errors = $checkField->checkLogin($email, $password);
+        if (count($errors)>0) {
+            foreach ($errors as  $error){
+                echo "<div class='alert alert-danger'>$error</div>";
+            }
+        }
+        else {
+            try{
+                if (User::authenticate($conn, $email, $password)) {
+                    Auth::login();
+                    Header('Location: welcome.php');
+                } 
+                else {
+                    echo"<div class='alert alert-danger'>Incorrect user or password</div>";
                 }
             }
-           else {
-                try{
-                    if (User::authenticate($conn, $email, $password)) {
-                        Auth::login();
-                        Header('Location: welcome.php');
-                    } 
-                    else {
-                        echo"<div class='alert alert-danger'>Incorrect user or password</div>"; 
-                    }
-                }
-                catch(PDOException $e){
-                    echo $e->getMessage();
-                    // Có thể gọi trang xử lí lỗi
-                    // Header('Location: error.php');
-                }
-           }
-    }
-    include_once "vendor/autoload.php";
-
-
-
-    if(isset($_GET["code"]))
-    {
-        $token = $google_client->fetchAccessTokenWithAuthCode($_GET["code"]);
-
-        if(!isset($token["error"]))
-        {
-            $google_client->setAccessToken($token['access_token']);
-
-            $_SESSION['access_token']=$token['access_token'];
-
-            $google_service = new Google_Service_Oauth2($google_client);
-
-            $data = $google_service->userinfo->get();
-
-            $current_datetime = date('Y-m-d H:i:s');
-
-            $_SESSION['first_name']=$data['given_name'];
-            $_SESSION['last_name']=$data['family_name'];
-            $_SESSION['email_address']=$data['email'];
-            $_SESSION['profile_picture']=$data['picture'];
+            catch(PDOException $e){
+                echo $e->getMessage();
+                // Có thể gọi trang xử lí lỗi
+                // Header('Location: error.php');
+            }
         }
     }
-    
-    
-    $login_button = '';
-    
-    // echo $_SESSION['access_token'];
-    
-    if(!$_SESSION['access_token'])
-    {
-        //  echo 'test';
-        
-    $login_button = '<a href="'.$google_client->createAuthUrl().'"><img src="img/sign-in-google.png" /></a>';
-    
-    }
 
-    // if($login_button != ''){
-    //     Auth::login();
-    //     header('Location: welcome.php');
-    // }
+
+    // require_once "classes/facebook_auth";
+    // $fb_auth = new Facebook_Auth();
+    // $loginUrl = $fb_auth->getLoginUrl();
+
+    require "auth-providers/google/index.php";
+    require_once "auth-providers/facebook/index.php";
+                
+                
+
 
 ?>
-    
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Login Form</title>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-        <link rel="stylesheet" href="styles.css">
-    </head>
-    <body>
-        <div class="container">
-            <h2 style="color: black; margin-bottom: 1.5rem">Login</h2>
-            <form action="login.php" method="post">
-                <div class="form-group">
-                    <input type="email" placeholder="Enter Email:" name="email" class="form-control">
-                </div>
-                <div class="form-group">
-                    <input type="password" placeholder="Enter Password:" name="password" class="form-control">
-                </div>
-                <div class="form-btn">
-                    <div >
-                        <input type="submit" value="Login" name="login" class="btn btn-primary">
-                    </div>
-                    <p>Not registered yet? <a style="text-decoration: none;" href="registration.php">Register here</a></p>
-                </div>
-            </form>
 
-            <br />
-            <div class="panel panel-default">
-            <?php
-                if(!empty($_SESSION['access_token']))
-                {
-                    Auth::login();
-                    header('Location: welcome.php');
-                }
-                else
-                {
-                 echo '<div align="center">'.$login_button . '</div>';
-                }
-            ?>
-            </div>
-        </div>
 
-    </body>
-</html> 
+<!doctype html>
+<html lang="en">
+  <head>
+  	<title>Login-Form</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<link rel="stylesheet" href="css/style.css">
+
+	</head>
+	<body>
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-12 col-lg-10">
+					<div class="wrap d-md-flex">
+						<div class="text-wrap p-4 p-lg-5 text-center d-flex align-items-center order-md-last">
+							<div class="text w-100">
+								<h2>Welcome to Login</h2>
+								<p>Don't have an account?</p>
+								<a href="registration.php" class="btn btn-white btn-outline-white">Sign Up</a>
+							</div>
+			      		</div>
+						<div class="login-wrap p-4 p-lg-5">
+							<div class="d-flex">
+								<div class="w-100">
+									<h3 class="mb-4" style="margin-top: -5px;">Sign In</h3>
+								</div>
+								<div class="social-media d-flex justify-content-end">
+									<?php	
+									if ($loginUrl == '') {
+										Auth::login();
+										header('Location: welcome.php');
+									} else {
+										echo $loginUrl;
+									}
+									if ($login_button == '') {
+										Auth::login();
+										header('Location: welcome.php');
+									} else {
+										echo $login_button;
+									}
+									?>
+								</div>
+									
+									<!-- <form action="login.php" class="social-media d-flex justify-content-end" method="get">
+										<button name="social_login" value="facebook" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-facebook"></span></button>
+										<button name="social_login" value="google" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-google"></span></button>
+									</form> -->
+							</div>
+							<form action="login.php" class="signin-form" method="post">
+								<div class="form-group mb-3">
+									<label class="label" for="name">Username</label>
+									<input type="Email" class="form-control" placeholder="Email" name="email" required>
+								</div>
+								<div class="form-group mb-3">
+									<label class="label" for="password">Password</label>
+									<input type="password" class="form-control" placeholder="Password" name="password" required>
+								</div>
+								<div class="form-group">
+									<input type="submit" value="Login" name="login" class="form-control btn btn-primary submit px-3">
+								</div>
+							</form>
+
+						</div>
+		      		</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	</body>
+</html>
+
