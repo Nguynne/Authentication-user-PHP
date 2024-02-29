@@ -39,34 +39,64 @@
 
 
 
-<!DOCTYPE html>
+
+
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration Form</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-        <div class="container">
-            <h2 style="color: black; margin-bottom: 1.5rem">Registration</h2>
-            <form action="registration.php" method="post">
-                <div class="form-group">
-                    <input type="email" class="form-control" name="email" placeholder="Email:">
-                </div>
-                <div class="form-group">
-                    <input type="password" class="form-control" name="password" placeholder="Password:">
-                </div>
-                <div class="form-group">
-                    <input type="password" class="form-control" name="repeat_password" placeholder="Repeat Password:">
-                </div>
-                <div class="form-btn">
-                    <input type="submit" class="btn btn-primary" value="Register" name="submit">
-                    <p>Have an account <a style="text-decoration: none;" href="login.php">Login Now</a></p>
-                </div>
-            </form>
-        </div>
-</body>
+  <head>
+  	<title>Login-Form</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<link rel="stylesheet" href="css/style.css">
+
+	</head>
+	<body>
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-12 col-lg-10">
+					<div class="wrap d-md-flex">
+						<div class="text-wrap p-4 p-lg-5 text-center d-flex align-items-center">
+							<div class="text w-100">
+								<h2>Welcome to Sign Up</h2>
+								<p>Have an account before?</p>
+								<a href="login.php" class="btn btn-white btn-outline-white">Sign In</a>
+							</div>
+			      		</div>
+						<div class="login-wrap p-4 p-lg-5 order-md-last">
+							<div class="d-flex">
+								<div class="w-100">
+									<h3 class="mb-4">Sign Up</h3>
+								</div>
+								
+							</div>
+							<form action="registration.php" class="signup-form" method="post">
+								<div class="form-group mb-3">
+									<label class="label" for="name">Username</label>
+									<input type="Email" class="form-control" placeholder="Email" name="email" >
+								</div>
+								<div class="form-group mb-3">
+									<label class="label" for="password">Password</label>
+									<input type="password" class="form-control" placeholder="Password" name="password" >
+								</div>
+								<div class="form-group mb-3">
+									<label class="label" for="name">Repeat Password</label>
+									<input type="password" class="form-control" placeholder="Repeat Password" name="repeat_password" >
+								</div>
+								<div class="form-group">
+									<input type="submit" value="Sign Up" name="submit" class="form-control btn btn-primary submit px-3">
+								</div>
+							</form>
+						</div>
+		      		</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	</body>
 </html>
