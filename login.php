@@ -33,13 +33,8 @@
         }
     }
 
-
-    // require_once "classes/facebook_auth";
-    // $fb_auth = new Facebook_Auth();
-    // $loginUrl = $fb_auth->getLoginUrl();
-
     require "auth-providers/google/index.php";
-    require_once "auth-providers/facebook/index.php";
+    require "auth-providers/facebook/index.php";
                 
                 
 
@@ -77,7 +72,7 @@
 						<div class="login-wrap p-4 p-lg-5">
 							<div class="d-flex">
 								<div class="w-100">
-									<h3 class="mb-4" style="margin-top: -5px;">Sign In</h3>
+									<h3 class="mb-4" style="margin-top: -5px; font-weight: 500;">Sign In</h3>
 								</div>
 								<div class="social-media d-flex justify-content-end">
 									<?php	
@@ -95,15 +90,10 @@
 									}
 									?>
 								</div>
-									
-									<!-- <form action="login.php" class="social-media d-flex justify-content-end" method="get">
-										<button name="social_login" value="facebook" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-facebook"></span></button>
-										<button name="social_login" value="google" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-google"></span></button>
-									</form> -->
 							</div>
 							<form action="login.php" class="signin-form" method="post">
 								<div class="form-group mb-3">
-									<label class="label" for="name">Username</label>
+									<label class="label" for="name">Email</label>
 									<input type="Email" class="form-control" placeholder="Email" name="email" required>
 								</div>
 								<div class="form-group mb-3">

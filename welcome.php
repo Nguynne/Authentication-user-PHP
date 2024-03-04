@@ -22,9 +22,8 @@
     {
         echo '<div class="panel-heading">Welcome User</div><div class="panel-body">';
         echo $_SESSION['fb_pic'];
-        echo "Facebook Name: ".$_SESSION['fb_name'];
+        echo "Facebook Name: ". $_SESSION['fb_name'];
         echo "Facebook ID: ". $_SESSION['fb_id'];
-        echo "Email: ". $_SESSION['fb_email'];
     }
 ?>
 <!DOCTYPE html>

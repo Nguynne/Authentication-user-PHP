@@ -22,7 +22,7 @@
         $requestPicture = $fb->get('/me/picture?redirect=false&height=200'); //getting user picture
         $picture = $requestPicture->getGraphUser();
         $profile = $profile_request->getGraphUser();
-        
+        $a = $profile->getField('email');
         $fbid = $profile->getProperty('id');           // To Get Facebook ID
         $fbfullname = $profile->getProperty('name');   // To Get Facebook full name
         $fbemail = $profile->getProperty('email');    //  To Get Facebook email
@@ -31,16 +31,12 @@
         # save the user information in session variable
         $_SESSION['fb_id'] = $fbid . '</br>';
         $_SESSION['fb_name'] = $fbfullname . '</br>';
-        $_SESSION['fb_email'] = $fbemail . '</br>';
         $_SESSION['fb_pic'] = $fbpic . '</br>';
         $_SESSION['profile'] = $picture;
         $_SESSION['ok'] = $profile;
-    
       } catch (Facebook\Exceptions\FacebookResponseException $e) {
         echo 'Graph returned an error: ' . $e->getMessage();
         session_destroy();
-        // redirecting user back to app login page
-        //  header("Location: profile.php");
         exit;
       }
   } else {
