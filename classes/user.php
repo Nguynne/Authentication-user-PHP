@@ -37,7 +37,7 @@
 
         // Thêm phương thức adduser
         public function addUser($conn){
-            if($this->validate()){
+            if($this->validate()){  
                 //Tạo câu lệnh insert chống SQL injection
                 $sql = "insert into users(username, password)
                         values(:username, :password);";

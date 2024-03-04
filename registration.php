@@ -71,22 +71,22 @@
 						<div class="login-wrap p-4 p-lg-5 order-md-last">
 							<div class="d-flex">
 								<div class="w-100">
-									<h3 class="mb-4">Sign Up</h3>
+									<h3 class="mb-4" style=" font-weight: 500;">Sign Up</h3>
 								</div>
 								
 							</div>
 							<form action="registration.php" class="signup-form" method="post">
 								<div class="form-group mb-3">
-									<label class="label" for="name">Username</label>
-									<input type="Email" class="form-control" placeholder="Email" name="email" >
+									<label class="label" for="name">Email</label>
+									<input type="Email" class="form-control" placeholder="Email" name="email" required>
 								</div>
 								<div class="form-group mb-3">
 									<label class="label" for="password">Password</label>
-									<input type="password" class="form-control" placeholder="Password" name="password" >
+									<input type="password" class="form-control" placeholder="Password" name="password" required>
 								</div>
 								<div class="form-group mb-3">
 									<label class="label" for="name">Repeat Password</label>
-									<input type="password" class="form-control" placeholder="Repeat Password" name="repeat_password" >
+									<input type="password" class="form-control" placeholder="Repeat Password" name="repeat_password" required>
 								</div>
 								<div class="form-group">
 									<input type="submit" value="Sign Up" name="submit" class="form-control btn btn-primary submit px-3">
